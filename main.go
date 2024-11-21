@@ -41,6 +41,16 @@ func startTasks(userAction int,
 
 	if userAction == 1 {
 		fmt.Println()
+		fmt.Printf("Threads: ")
+		threads, err := strconv.Atoi(inputUser())
+
+		if err != nil {
+			log.Panicf("Wrong Threads Number: %s", err)
+		}
+
+		global.Semaphore = make(chan struct{}, threads)
+		fmt.Println()
+
 		for i := 0; i < len(accountsList); i++ {
 			account := accountsList[i]
 			proxy := proxyList[i]
@@ -87,6 +97,16 @@ func startTasks(userAction int,
 		var mu sync.Mutex
 
 		fmt.Println()
+		fmt.Printf("Threads: ")
+		threads, err := strconv.Atoi(inputUser())
+
+		if err != nil {
+			log.Panicf("Wrong Threads Number: %s", err)
+		}
+
+		global.Semaphore = make(chan struct{}, threads)
+		fmt.Println()
+
 		for i := 0; i < len(accountsList); i++ {
 			account := accountsList[i]
 			proxy := proxyList[i]
@@ -119,7 +139,7 @@ func main() {
 	var accountsListSorted []string
 	defer handlePanic()
 
-	err := utils.ReadJson("data/config.json", &global.ConfigFile)
+	err := utils.ReadJson("./data/config.json", &global.ConfigFile)
 
 	if err != nil {
 		log.Panicf("Error reading config file: %s", err)
