@@ -109,7 +109,7 @@ func loginAccount(client *fasthttp.Client,
 	signHash := fmt.Sprintf("0x%x", signature)
 
 	payload := map[string]interface{}{
-		"invite_code": "133d76e4",
+		"invite_code": "a4be529e",
 		"key":         address.String(),
 		"wallet_hash": signHash,
 	}
